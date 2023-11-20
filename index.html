@@ -7,6 +7,7 @@
             width: 100px;
             height: 100px;
             margin: 10px;
+            border: 1px solid #ddd; /* Add a border to see the image box */
         }
     </style>
 </head>
@@ -18,11 +19,26 @@
             .then(response => response.json())
             .then(images => {
                 const gallery = document.getElementById('image-gallery');
-                images.forEach(image => {
+
+                // Debug: Use only first 10 images for testing
+                images.slice(0, 10).forEach(image => {
                     const img = document.createElement('img');
-                    img.src = 'wandb_images/media/images/' + image;
+                    img.src = 'wandb_images/media/images/' + image; // Ensure the path is correct
+
+                    // Debug: Log the image source
+                    console.log('Loading image:', img.src);
+
+                    // Add error listener for debugging
+                    img.onerror = function() {
+                        console.error('Failed to load image:', img.src);
+                    };
+
                     gallery.appendChild(img);
                 });
+            })
+            .catch(error => {
+                // Catch and log any errors in the fetch operation
+                console.error('Error fetching image list:', error);
             });
     </script>
     
