@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WandB Image Gallery</title>
+    <style>
+        img {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="image-gallery"></div>
+
+    <script>
+        fetch('image_list.json')
+            .then(response => response.json())
+            .then(images => {
+                const gallery = document.getElementById('image-gallery');
+                images.forEach(image => {
+                    const img = document.createElement('img');
+                    img.src = 'wandb_images/media/images' + image;
+                    gallery.appendChild(img);
+                });
+            });
+    </script>
+    
+</body>
+</html>
